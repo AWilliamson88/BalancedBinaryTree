@@ -25,7 +25,6 @@ public class MPTree {
         } else {
             addRecursive(root, part);
         }
-
     }
 
     // Add the new part into the tree if it's not there already.
@@ -50,50 +49,61 @@ public class MPTree {
         return current;
     }
 
-    public boolean containsPart(String partToSearch) {
-        return searchForPart(root, partToSearch);
+    
+    public String Find(String partToSearch) {
+        
+        String s = partToSearch +" was " +
+                searchForPart(root, partToSearch) + " in the list.";
+        return s;
     }
 
-    private boolean searchForPart(Part current, String partToSearch) {
+    private String searchForPart(Part current, String partToSearch) {
         if (current == null) {
-            return false;
+            return "not found";
         }
 
         if (partToSearch.compareToIgnoreCase(current.name) > 0) {
             return searchForPart(current.right, partToSearch);
+            
         }
         if (partToSearch.compareToIgnoreCase(current.name) < 0) {
-            searchForPart(current.left, partToSearch);
+            return searchForPart(current.left, partToSearch);
         }
+        
         // the current one is the one your looking for.
-        return true;
+        return "found";
     }
 
+    // Returns a string with the root and the left and right trees.
     public String Display() {
         
         if (root == null) {
             return "There are no parts.";
         }
         String displayString = DisplayRoot() +
-                "\nLEFT TREE: " + DisplayTreeSide(root.left) +
-                "\nRIGHT TREE: " + DisplayTreeSide(root.right) ;
+                "\nLEFT TREE: " + DisplayTree(root.left) +
+                "\nRIGHT TREE: " + DisplayTree(root.right) ;
         
         return displayString;
     }
 
-    private String DisplayTreeSide(Part current) {
+    // Returns the values of the nodes in a tree.
+    // Called by the Display().
+    private String DisplayTree(Part current) {
 
         String s = "";
         if (current != null) {
 
             s += current.name + ", ";
-            s += DisplayTreeSide(current.left);
-            s += DisplayTreeSide(current.right);
+            s += DisplayTree(current.left);
+            s += DisplayTree(current.right);
 
         }
         return s;
     }
-
+    
+    // Returns a string with the root.
+    // Called by the Display().
     private String DisplayRoot() {
 
         if (root == null) {
@@ -103,6 +113,7 @@ public class MPTree {
         return a;
     }
 
+    
     public void delete(String partName) {
         deletePart(root, partName);
     }

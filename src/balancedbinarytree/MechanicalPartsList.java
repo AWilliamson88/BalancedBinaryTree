@@ -35,6 +35,25 @@ public class MechanicalPartsList {
         //LinkedList<MPTree> parts = new LinkedList<>();
 //        System.out.println(partsTree.DisplayRoot());
         System.out.println(partsTree.Display());
+        
+        System.out.println();
+        
+        System.out.println(partsTree.Find("Michael"));
+        System.out.println(partsTree.Find("Lily"));
+        System.out.println(partsTree.Find("Becky"));
+        System.out.println(partsTree.Find("Stacey"));
+        System.out.println(partsTree.Find("Emma"));
+        System.out.println(partsTree.Find("David"));
+        System.out.println(partsTree.Find("Tiffany"));
+        System.out.println(partsTree.Find("William"));
+        System.out.println(partsTree.Find("Ethan"));
+        System.out.println(partsTree.Find("Zoe"));
+        System.out.println(partsTree.Find("MAva"));
+        System.out.println(partsTree.Find("Oliver"));
+        System.out.println(partsTree.Find("Jill"));
+        System.out.println(partsTree.Find("Issac"));
+        
+        
 
     }
 
