@@ -26,34 +26,42 @@ public class MechanicalPartsList {
         partsTree.add("Lily");
         partsTree.add("Jill");
         partsTree.add("Oliver");
-        partsTree.add("Ethan");
+        partsTree.add("Than");
         partsTree.add("Stacey");
         partsTree.add("Becky");
 
-        boolean isBalanced = partsTree.IsTreeBalanced(partsTree);
-
+        System.out.println(partsTree.isBalanced());
         //LinkedList<MPTree> parts = new LinkedList<>();
 //        System.out.println(partsTree.DisplayRoot());
         System.out.println(partsTree.display());
-        
+
         System.out.println();
-        
-        System.out.println(partsTree.find("Michael"));
-        System.out.println(partsTree.find("Lily"));
-        System.out.println(partsTree.find("Becky"));
-        System.out.println(partsTree.find("Stacey"));
-        System.out.println(partsTree.find("Emma"));
-        System.out.println(partsTree.find("David"));
-        System.out.println(partsTree.find("Tiffany"));
-        System.out.println(partsTree.find("William"));
-        System.out.println(partsTree.find("Ethan"));
-        System.out.println(partsTree.find("Zoe"));
-        System.out.println(partsTree.find("MAva"));
-        System.out.println(partsTree.find("Oliver"));
-        System.out.println(partsTree.find("Jill"));
-        System.out.println(partsTree.find("Issac"));
-        
-        
+
+//        System.out.println(partsTree.find("Michael"));
+//        System.out.println(partsTree.find("Lily"));
+//        System.out.println(partsTree.find("Becky"));
+//        System.out.println(partsTree.find("Stacey"));
+//        System.out.println(partsTree.find("Emma"));
+//        System.out.println(partsTree.find("David"));
+//        System.out.println(partsTree.find("Tiffany"));
+//        System.out.println(partsTree.find("William"));
+//        System.out.println(partsTree.find("Ethan"));
+//        System.out.println(partsTree.find("Zoe"));
+//        System.out.println(partsTree.find("MAva"));
+//        System.out.println(partsTree.find("Oliver"));
+//        System.out.println(partsTree.find("Jill"));
+//        System.out.println(partsTree.find("Issac"));
+
+        partsTree.delete("David");
+        partsTree.delete("Becky");
+
+        partsTree.delete("Issac");
+        partsTree.delete("Michael");
+        partsTree.delete("Lily");
+        partsTree.delete("Jill");
+        System.out.println(partsTree.isBalanced());
+
+        System.out.println(partsTree.display());
 
     }
 

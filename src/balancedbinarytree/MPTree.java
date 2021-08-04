@@ -39,12 +39,12 @@ public class MPTree {
             // Part comes before the current part, go to the left.
             current.left = addRecursive(current.left, newPart);
 
-            //current = BalanceTree(current);
+            current = balanceTree(current);
         } else if (newPart.name.compareToIgnoreCase(current.name) > 0) {
             // Part comes after the current part, go to the right.
             current.right = addRecursive(current.right, newPart);
 
-            //current = BalanceTree(current);
+            current = balanceTree(current);
         }
         return current;
     }
@@ -81,7 +81,9 @@ public class MPTree {
         }
         String displayString = displayRoot()
                 + "\nLEFT TREE: " + displayTree(root.left)
-                + "\nRIGHT TREE: " + displayTree(root.right);
+                + "\nRIGHT TREE: " + displayTree(root.right)
+                + "\n left " + getHeight(root.left)
+                + "\n right " + getHeight(root.right);
 
         return displayString;
     }
@@ -113,43 +115,169 @@ public class MPTree {
     }
 
     public void delete(String partName) {
-        deletePart(root, partName);
+        root = deletePart(root, partName);
     }
 
     private Part deletePart(Part current, String partName) {
+
+        Part parent;
         if (current == null) {
-            return null;
-        }
+            return current;
+        } else {
 
-        if (partName.compareToIgnoreCase(current.name) == 0) {
-            // Node to delete found
-            // ... code to delete the node will go here
-
-            // Null if there are no children.
-            if (current.left == null && current.right == null) {
-                return null;
-            }
-
-            // If one is null return the other.
-            if (current.left == null) {
-                return current.right;
-            }
-            if (current.right == null) {
-                return current.left;
-            }
-
-            // If there are two children.
             if (partName.compareToIgnoreCase(current.name) < 0) {
+
                 current.left = deletePart(current.left, partName);
+
+                if (balanceFactor(current) == -2) {
+
+                    if (balanceFactor(current.right) <= 0) {
+
+                        current = rotateRR(current);
+
+                    } else {
+
+                        current = rotateRL(current);
+                    }
+                }
+            } else if (partName.compareToIgnoreCase(current.name) > 0) {
+
+                current.right = deletePart(current.right, partName);
+                if (balanceFactor(current) == 2) {
+
+                    if (balanceFactor(current.left) >= 0) {
+
+                        current = rotateLL(current);
+
+                    } else {
+
+                        current = rotateLR(current);
+                    }
+                }
                 
             } else {
-                current.right = deletePart(current.right, partName);
+
+                if (current.right != null) {
+
+                    parent = current.right;
+
+                    while (parent.left != null) {
+                        parent = parent.left;
+                    }
+
+                    current.name = parent.name;
+                    current.right = deletePart(current.right, parent.name);
+
+                    if (balanceFactor(current) == 2) {
+
+                        if (balanceFactor(current.left) >= 0) {
+
+                            current = rotateLL(current);
+
+                        } else {
+
+                            current = rotateLR(current);
+                        }
+                    }
+
+                } else {
+
+                    return current.left;
+                }
+            }
+        }
+        return current;
+    }
+
+    private Part balanceTree(Part current) {
+
+        int bf = balanceFactor(current);
+
+        if (bf > 1) {
+
+            if (balanceFactor(current.left) > 0) {
+
+                current = rotateLL(current);
+
+            } else {
+
+                current = rotateLR(current);
+
             }
 
+        } else if (bf < -1) {
+
+            if (balanceFactor(current.right) > 0) {
+
+                current = rotateRL(current);
+
+            } else {
+
+                current = rotateRR(current);
+            }
+        }
+        return current;
+    }
+
+    private int balanceFactor(Part current) {
+
+        if (current == null) {
+            return 0;
         }
 
-        return current;
+        int l = getHeight(current.left);
+        int r = getHeight(current.right);
+//        int bf = Math.abs(l - r);
+        int bf = l - r;
+        return bf;
+    }
 
+    private Part rotateRR(Part parent) {
+
+        Part pivot = parent.right;
+        parent.right = pivot.left;
+        pivot.left = parent;
+        return pivot;
+    }
+
+    private Part rotateLL(Part parent) {
+
+        Part pivot = parent.left;
+        parent.left = pivot.right;
+        pivot.right = parent;
+        return pivot;
+    }
+
+    private Part rotateLR(Part parent) {
+
+        Part pivot = parent.left;
+        parent.left = rotateRR(pivot);
+        return rotateLL(parent);
+    }
+
+    private Part rotateRL(Part parent) {
+
+        Part pivot = parent.right;
+        parent.right = rotateLL(pivot);
+        return rotateRR(parent);
+    }
+
+    private int max(int l, int r) {
+        return l > r ? l : r;
+    }
+
+    private int getHeight(Part current) {
+
+        int height = 0;
+        if (current != null) {
+            int l = getHeight(current.left);
+            int r = getHeight(current.right);
+//            System.out.println(l);
+//            System.out.println(r);
+            int m = max(l, r);
+            height = m + 1;
+        }
+        return height;
     }
 
     // Method to find the total value of all the nodes in the tree.
@@ -165,38 +293,39 @@ public class MPTree {
         }
     }
 
-    public boolean IsTreeBalanced(MPTree root) {
+    public boolean isBalanced() {
+        return isTreeBalanced(root);
+    }
+    
+    private boolean isTreeBalanced(Part root) {
+        
         if (root == null) {
             return true;
         }
-        return (GetHeight(root) >= 1);
+        
+        // Get the height of the left and right trees
+        int leftHeight = GetHeight(root.left);
+        int rightHeight = GetHeight(root.right);
+        
+        if (Math.abs(leftHeight - rightHeight) <= 1
+                && isTreeBalanced(root.left)
+                && isTreeBalanced(root.right)) {
+            return true;
+        }
+        
+        return false;
     }
 
-    public int GetHeight(MPTree node) {
+    public int GetHeight(Part current) {
 
         // If the tree is empty then return 0
-        if (node == null) {
+        if (current == null) {
             return 0;
-        }
-
-        // Get the height of the left and right trees
-        //int leftHeight = GetHeight(node.getLeft());
-        //int rightHeight = GetHeight(node.getRight());
-        // If the left or right tree's heights are less than 0 or
-        // the left tree height minus the right tree height is greater than 1
-        // return -1 indecating the tree is unbalanced.
-        /*
-        if (leftHeight < 0 || 
-                rightHeight < 0 || 
-                Math.abs(leftHeight - rightHeight) > 1) {
-            return -1;
         }
         
         // Return the higher number plus 1.
-        return Math.max(leftHeight, rightHeight) + 1;
-         */
-        // delete this.
-        return 0;
+        return Math.max(GetHeight(current.left), GetHeight(current.right)) + 1;
+         
     }
 
     /**
