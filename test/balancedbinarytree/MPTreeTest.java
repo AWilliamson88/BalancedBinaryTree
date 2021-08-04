@@ -45,13 +45,13 @@ public class MPTreeTest {
     public void partFoundCorrectly() {
         MPTree pt = new MPTree("root");
         
-        assertTrue(pt.Find("Cap Spanner"));
+        assertTrue(pt.find("Cap Spanner"));
         
-        assertTrue(pt.Find("Spanner"));
+        assertTrue(pt.find("Spanner"));
         
-        assertTrue(pt.Find("Washer"));
+        assertTrue(pt.find("Washer"));
         
-        assertTrue(pt.Find("Screw Driver"));
+        assertTrue(pt.find("Screw Driver"));
         
         //System.out.println("containsPart");
         //String partToSearch = "";
