@@ -54,11 +54,11 @@ public class MechanicalPartsList {
 
         partsTree.delete("David");
         partsTree.delete("Becky");
-
         partsTree.delete("Issac");
         partsTree.delete("Michael");
         partsTree.delete("Lily");
         partsTree.delete("Jill");
+        
         System.out.println(partsTree.isBalanced());
 
         System.out.println(partsTree.display());

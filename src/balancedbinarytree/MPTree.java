@@ -272,25 +272,10 @@ public class MPTree {
         if (current != null) {
             int l = getHeight(current.left);
             int r = getHeight(current.right);
-//            System.out.println(l);
-//            System.out.println(r);
             int m = max(l, r);
             height = m + 1;
         }
         return height;
-    }
-
-    // Method to find the total value of all the nodes in the tree.
-    // Assuming all the node values are integers.
-    public int FindSum(MPTree root) {
-
-        if (root == null) {
-            return 0;
-        } else {
-            return 0;
-            //return root.getValue() + FindSum(root.getLeft()) +
-            // FindSum(root.getRight());
-        }
     }
 
     public boolean isBalanced() {
@@ -304,8 +289,8 @@ public class MPTree {
         }
         
         // Get the height of the left and right trees
-        int leftHeight = GetHeight(root.left);
-        int rightHeight = GetHeight(root.right);
+        int leftHeight = getHeight(root.left);
+        int rightHeight = getHeight(root.right);
         
         if (Math.abs(leftHeight - rightHeight) <= 1
                 && isTreeBalanced(root.left)
@@ -314,18 +299,6 @@ public class MPTree {
         }
         
         return false;
-    }
-
-    public int GetHeight(Part current) {
-
-        // If the tree is empty then return 0
-        if (current == null) {
-            return 0;
-        }
-        
-        // Return the higher number plus 1.
-        return Math.max(GetHeight(current.left), GetHeight(current.right)) + 1;
-         
     }
 
     /**
