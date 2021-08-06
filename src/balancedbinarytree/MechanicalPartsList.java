@@ -4,10 +4,14 @@ import java.util.LinkedList;
 
 /**
  *
- * @author Andrew Williamson / P113357 Date: 31/07/2021 Java 3 AT2 Q2 Question 2
- * – You are required to make a mechanical parts list sorted alphabetically. You
- * need to create a balanced binary search tree for a dictionary of no less than
- * 10 words. You must be able to search the list, add and remove from the list.
+ * @author Andrew Williamson / P113357 
+ * Date: 31/07/2021 
+ * Java 3 AT2 Q2 
+ * Question 2
+ * – You are required to make a mechanical parts list sorted alphabetically. 
+ * You need to create a balanced binary search tree for a dictionary of 
+ * no less than 10 words. 
+ * You must be able to search the list, add and remove from the list.
  */
 public class MechanicalPartsList {
 
@@ -48,6 +52,7 @@ public class MechanicalPartsList {
 
         System.out.println("Attempting to delete something that isn't in the list.");
         partsTree.delete("David");
+
         System.out.println();
 
         // Delete a bunch of items, all from the same side of the tree.

@@ -1,18 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package balancedbinarytree;
 
-//import org.junit.jupiter.api.Test;
-//import static org.junit.jupiter.api.Assertions.*;
 import static junit.framework.Assert.assertEquals;
 import org.junit.Test;
 
 /**
  *
- * @author Andrew
+ * @author Andrew Williamson / P113357 
+ * Date: 31/07/2021 
+ * Java 3 AT2 Q2 
+ * Question 2
+ * – You are required to make a mechanical parts list sorted alphabetically. 
+ * You need to create a balanced binary search tree for a dictionary of no 
+ * less than 10 words. 
+ * You must be able to search the list, add and remove from the list.
  */
 public class MPTreeTest {
 
@@ -57,7 +57,7 @@ public class MPTreeTest {
      * Test if Items in the list are deleted correctly.
      */
     @Test
-    public void ItemsDeletedCorrectly() {
+    public void partsDeletedCorrectly() {
 
         MPTree test = new MPTree();
 
