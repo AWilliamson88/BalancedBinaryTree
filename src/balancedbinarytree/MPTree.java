@@ -18,12 +18,12 @@ public class MPTree {
     // Public method to make sure the addPart() always starts at the root.
     public void add(String partName) {
 
-        Part part = new Part(partName);
+        Part newPart = new Part(partName);
 
         if (root == null) {
-            root = part;
+            root = newPart;
         } else {
-            addRecursive(root, part);
+            root = addRecursive(root, newPart);
         }
     }
 
@@ -38,27 +38,29 @@ public class MPTree {
         if (newPart.name.compareToIgnoreCase(current.name) < 0) {
             // Part comes before the current part, go to the left.
             current.left = addRecursive(current.left, newPart);
-
             current = balanceTree(current);
+
         } else if (newPart.name.compareToIgnoreCase(current.name) > 0) {
             // Part comes after the current part, go to the right.
             current.right = addRecursive(current.right, newPart);
-
             current = balanceTree(current);
+
         }
         return current;
     }
 
     public String find(String partToSearch) {
 
-        String s = partToSearch + " was "
-                + searchForPart(root, partToSearch) + " in the list.";
-        return s;
+        if (searchForPart(root, partToSearch)) {
+            return partToSearch + " was found in the list.";
+        }
+
+        return partToSearch + " was not found in the list.";
     }
 
-    private String searchForPart(Part current, String partToSearch) {
+    private boolean searchForPart(Part current, String partToSearch) {
         if (current == null) {
-            return "not found";
+            return false;
         }
 
         if (partToSearch.compareToIgnoreCase(current.name) > 0) {
@@ -70,7 +72,7 @@ public class MPTree {
         }
 
         // the current one is the one your looking for.
-        return "found";
+        return true;
     }
 
     // Returns a string with the root and the left and right trees.
@@ -82,8 +84,8 @@ public class MPTree {
         String displayString = displayRoot()
                 + "\nLEFT TREE: " + displayTree(root.left)
                 + "\nRIGHT TREE: " + displayTree(root.right)
-                + "\n left " + getHeight(root.left)
-                + "\n right " + getHeight(root.right);
+                + "\nLeft-Side Height: " + getHeight(root.left)
+                + "\nRight-Side Height: " + getHeight(root.right);
 
         return displayString;
     }
@@ -115,7 +117,19 @@ public class MPTree {
     }
 
     public void delete(String partName) {
-        root = deletePart(root, partName);
+
+        if (root != null) {
+            if (searchForPart(root, partName)) {
+                root = deletePart(root, partName);
+                System.out.println(
+                        partName + " has been removed from the list.");
+            } else {
+                System.out.println("That item does is not in the list.\n"
+                        + "Please check your spelling and try again.");
+            }
+        } else {
+            System.out.println("The List is Empty.");
+        }
     }
 
     private Part deletePart(Part current, String partName) {
@@ -154,7 +168,7 @@ public class MPTree {
                         current = rotateLR(current);
                     }
                 }
-                
+
             } else {
 
                 if (current.right != null) {
@@ -227,7 +241,6 @@ public class MPTree {
 
         int l = getHeight(current.left);
         int r = getHeight(current.right);
-//        int bf = Math.abs(l - r);
         int bf = l - r;
         return bf;
     }
@@ -278,26 +291,30 @@ public class MPTree {
         return height;
     }
 
-    public boolean isBalanced() {
-        return isTreeBalanced(root);
+    public String isBalanced() {
+
+        if (isTreeBalanced(root)) {
+            return "The Binary Tree is Balanced.";
+        }
+        return "The Binary Tree is Unbalanced.";
     }
-    
+
     private boolean isTreeBalanced(Part root) {
-        
+
         if (root == null) {
             return true;
         }
-        
+
         // Get the height of the left and right trees
         int leftHeight = getHeight(root.left);
         int rightHeight = getHeight(root.right);
-        
+
         if (Math.abs(leftHeight - rightHeight) <= 1
                 && isTreeBalanced(root.left)
                 && isTreeBalanced(root.right)) {
             return true;
         }
-        
+
         return false;
     }
 

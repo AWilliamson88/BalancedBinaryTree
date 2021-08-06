@@ -26,15 +26,25 @@ public class MPTreeTest {
      * Test of add method, of class MPTree.
      */
     @Test
-    public void partsAddedCorrectly() {
+    public void partsAdded_AndFound_Correctly() {
+        
+        MPTree test = new MPTree();
+        
+        test.add("Screwdriver");
+        test.add("Washer");
+        test.add("O-rings");
+        test.add("Bolts");
+        test.add("Rivets");
         
         
-        //System.out.println("add");
-        //String newPart = "";
-        //MPTree instance = null;
-        //instance.add(newPart);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
+        
+        String expected = 
+        
+        assertEquals(message, expected, actual);
+        
+        String newPart = "";
+        MPTree instance = null;
+        instance.add(newPart);
     }
 
     
@@ -43,15 +53,15 @@ public class MPTreeTest {
      */
     @Test
     public void partFoundCorrectly() {
-        MPTree pt = new MPTree("root");
+        MPTree test = new MPTree();
         
-        assertTrue(pt.find("Cap Spanner"));
+        assertTrue(test.find("Cap Spanner"));
         
-        assertTrue(pt.find("Spanner"));
+        assertTrue(test.find("Spanner"));
         
-        assertTrue(pt.find("Washer"));
+        assertTrue(test.find("Washer"));
         
-        assertTrue(pt.find("Screw Driver"));
+        assertTrue(test.find("Screw Driver"));
         
         //System.out.println("containsPart");
         //String partToSearch = "";

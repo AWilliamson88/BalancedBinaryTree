@@ -15,51 +15,52 @@ public class MechanicalPartsList {
 
         MPTree partsTree = new MPTree();
 
-        partsTree.add("MAva");
-        partsTree.add("Zoe");
-        partsTree.add("David");
-        partsTree.add("William");
-        partsTree.add("Emma");
-        partsTree.add("Tiffany");
-        partsTree.add("Issac");
-        partsTree.add("Michael");
-        partsTree.add("Lily");
-        partsTree.add("Jill");
-        partsTree.add("Oliver");
-        partsTree.add("Than");
-        partsTree.add("Stacey");
-        partsTree.add("Becky");
+        partsTree.add("Screwdriver");
+        partsTree.add("Washer");
+        partsTree.add("Nuts");
+        partsTree.add("Bolts");
+        partsTree.add("Rivets");
+        partsTree.add("Retaining Rings");
+        partsTree.add("Hose Clamps");
+        partsTree.add("Cable Ties");
+        partsTree.add("Levers");
+        partsTree.add("Springs");
+        partsTree.add("Bumpers");
+        partsTree.add("Mechanical Seal");
+        partsTree.add("O-rings");
+        partsTree.add("Rotor");
 
+        // Check if the tree is balanced.
         System.out.println(partsTree.isBalanced());
-        //LinkedList<MPTree> parts = new LinkedList<>();
-//        System.out.println(partsTree.DisplayRoot());
+
+        // Print the list.
         System.out.println(partsTree.display());
 
         System.out.println();
 
-//        System.out.println(partsTree.find("Michael"));
-//        System.out.println(partsTree.find("Lily"));
-//        System.out.println(partsTree.find("Becky"));
-//        System.out.println(partsTree.find("Stacey"));
-//        System.out.println(partsTree.find("Emma"));
-//        System.out.println(partsTree.find("David"));
-//        System.out.println(partsTree.find("Tiffany"));
-//        System.out.println(partsTree.find("William"));
-//        System.out.println(partsTree.find("Ethan"));
-//        System.out.println(partsTree.find("Zoe"));
-//        System.out.println(partsTree.find("MAva"));
-//        System.out.println(partsTree.find("Oliver"));
-//        System.out.println(partsTree.find("Jill"));
-//        System.out.println(partsTree.find("Issac"));
+        // Attempt to find parts.
+        System.out.println(partsTree.find("O-rings"));
+        System.out.println(partsTree.find("Washer"));
+        System.out.println(partsTree.find("Levers"));
+        System.out.println(partsTree.find("Rotor"));
 
-        partsTree.delete("David");
-        partsTree.delete("Becky");
-        partsTree.delete("Issac");
-        partsTree.delete("Michael");
-        partsTree.delete("Lily");
-        partsTree.delete("Jill");
+        System.out.println();
+
         
+        // Delete a bunch of items, all from the same side of the tree.
+        System.out.println("Deleting 5 Items from the list.");
+        partsTree.delete("David");
+        partsTree.delete("Hose Clamps");
+        partsTree.delete("Bumpers");
+        partsTree.delete("Bolts");
+        partsTree.delete("Mechanical Seal");
+
+        
+        System.out.println();
+
         System.out.println(partsTree.isBalanced());
+
+        System.out.println();
 
         System.out.println(partsTree.display());
 
