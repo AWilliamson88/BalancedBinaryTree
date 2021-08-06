@@ -8,114 +8,126 @@ package balancedbinarytree;
 //import org.junit.jupiter.api.Test;
 //import static org.junit.jupiter.api.Assertions.*;
 import static junit.framework.Assert.assertEquals;
-import static junit.framework.Assert.assertTrue;
-import static junit.framework.Assert.fail;
 import org.junit.Test;
-import org.junit.*;
 
 /**
  *
  * @author Andrew
  */
 public class MPTreeTest {
-    
+
     public MPTreeTest() {
     }
 
     /**
-     * Test of add method, of class MPTree.
+     * Test of add and find methods, of class MPTree.
      */
     @Test
     public void partsAdded_AndFound_Correctly() {
-        
+
         MPTree test = new MPTree();
-        
+
         test.add("Screwdriver");
         test.add("Washer");
         test.add("O-rings");
+
+        String expected = "Screwdriver was found in the list.";
+        String actual = test.find("Screwdriver");
+        assertEquals("Screwdriver not found", expected, actual);
+
+        expected = "Washer was found in the list.";
+        actual = test.find("Washer");
+        assertEquals("Washer not found", expected, actual);
+
+        expected = "O-rings was found in the list.";
+        actual = test.find("O-rings");
+        assertEquals("O-rings not found", expected, actual);
+
+        expected = "screwdriver was found in the list.";
+        actual = test.find("screwdriver");
+        assertEquals("screwdriver not found", expected, actual);
+
+        expected = "washer was found in the list.";
+        actual = test.find("washer");
+        assertEquals("Washer not found", expected, actual);
+
+    }
+
+    /**
+     * Test if Items in the list are deleted correctly.
+     */
+    @Test
+    public void ItemsDeletedCorrectly() {
+
+        MPTree test = new MPTree();
+
+        test.add("Screwdriver");
+        test.add("Washer");
+        test.add("O-rings");
+
+        test.delete("Screwdriver");
+        String expected = "Screwdriver was not found in the list.";
+        String actual = test.find("Screwdriver");
+        assertEquals("Screwdriver was found", expected, actual);
+
+        test.delete("Washer");
+        expected = "Washer was not found in the list.";
+        actual = test.find("Washer");
+        assertEquals("Washer was found", expected, actual);
+
+        test.delete("O-rings");
+        expected = "O-rings was not found in the list.";
+        actual = test.find("O-rings");
+        assertEquals("O-rings was found", expected, actual);
+    }
+
+    /**
+     * Test balancing methods work correctly.
+     */
+    @Test
+    public void TreeMaintainsBalance() {
+
+        MPTree test = new MPTree();
+
+        test.add("Screwdriver");
+        test.add("Washer");
+        test.add("O-rings");
+        test.add("Nuts");
+
+        String treeIsBalanced = "The Binary Tree is Balanced.";
+
+        String balanceTest = test.isBalanced();
+        assertEquals("The Tree is Unbalanced.", treeIsBalanced, balanceTest);
+
         test.add("Bolts");
         test.add("Rivets");
-        
-        
-        
-        String expected = 
-        
-        assertEquals(message, expected, actual);
-        
-        String newPart = "";
-        MPTree instance = null;
-        instance.add(newPart);
+        test.add("Retaining Rings");
+        test.add("Hose Clamps");
+
+        balanceTest = test.isBalanced();
+        assertEquals("The Tree is Unbalanced.", treeIsBalanced, balanceTest);
+
+        test.add("Cable Ties");
+        test.add("Levers");
+        test.add("Springs");
+        test.add("Bumpers");
+        test.add("Mechanical Seal");
+        test.add("Rotor");
+
+        balanceTest = test.isBalanced();
+        assertEquals("The Tree is Unbalanced.", treeIsBalanced, balanceTest);
+
+        test.delete("Screwdriver");
+        test.delete("Washer");
+        test.delete("O-rings");
+        test.delete("Hose Clamps");
+        test.delete("Bumpers");
+        test.delete("Bolts");
+        test.delete("Mechanical Seal");
+
+        balanceTest = test.isBalanced();
+        assertEquals("The Tree is Unbalanced.", treeIsBalanced, balanceTest);
+
     }
 
-    
-    /**
-     * Test of containsPart method, of class MPTree.
-     */
-    @Test
-    public void partFoundCorrectly() {
-        MPTree test = new MPTree();
-        
-        assertTrue(test.find("Cap Spanner"));
-        
-        assertTrue(test.find("Spanner"));
-        
-        assertTrue(test.find("Washer"));
-        
-        assertTrue(test.find("Screw Driver"));
-        
-        //System.out.println("containsPart");
-        //String partToSearch = "";
-        //MPTree instance = null;
-        //boolean expResult = false;
-        //boolean result = instance.containsPart(partToSearch);
-        //assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        //fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of FindSum method, of class MPTree.
-     */
-    @Test
-    public void testFindSum() {
-        System.out.println("FindSum");
-        MPTree root = null;
-        MPTree instance = null;
-        int expResult = 0;
-        int result = instance.FindSum(root);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of IsTreeBalanced method, of class MPTree.
-     */
-    @Test
-    public void testIsTreeBalanced() {
-        System.out.println("IsTreeBalanced");
-        MPTree root = null;
-        MPTree instance = null;
-        boolean expResult = false;
-        boolean result = instance.IsTreeBalanced(root);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
-    /**
-     * Test of GetHeight method, of class MPTree.
-     */
-    @Test
-    public void testGetHeight() {
-        System.out.println("GetHeight");
-        MPTree node = null;
-        MPTree instance = null;
-        int expResult = 0;
-        int result = instance.GetHeight(node);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-    
 }

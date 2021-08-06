@@ -46,22 +46,25 @@ public class MechanicalPartsList {
 
         System.out.println();
 
-        
-        // Delete a bunch of items, all from the same side of the tree.
-        System.out.println("Deleting 5 Items from the list.");
+        System.out.println("Attempting to delete something that isn't in the list.");
         partsTree.delete("David");
+        System.out.println();
+
+        // Delete a bunch of items, all from the same side of the tree.
+        System.out.println("Deleting 4 Items that are in the list.");
         partsTree.delete("Hose Clamps");
         partsTree.delete("Bumpers");
         partsTree.delete("Bolts");
         partsTree.delete("Mechanical Seal");
 
-        
         System.out.println();
 
+        // Check if the list is still balanced.
         System.out.println(partsTree.isBalanced());
 
         System.out.println();
 
+        // Display the list again.
         System.out.println(partsTree.display());
 
     }
